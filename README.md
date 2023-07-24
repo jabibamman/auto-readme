@@ -1,3 +1,4 @@
+<h1 align="center">Auto Readme</h1>
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
@@ -5,26 +6,22 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+  <p align="center">This Nest.js project periodically updates the number of public repositories a GitHub user is maintaining in the `README.md` of a repository. The project retrieves the number of public repos and if this number has changed, it will update the README.md file on Github.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Configuration
+
+To use this service, you'll need to set two environment variables:
+
+```sh
+GITHUB_TOKEN=your_token
+GITHUB_USERNAME=the_username_you_want_to_retrieve_the_repos_from
+````
+
+`GITHUB_TOKEN`: A personal access token of a GitHub user. You can generate this from your GitHub settings.
+
+`GITHUB_USERNAME`: The GitHub username of the account you want to retrieve the public repos from.
 
 ## Installation
 
@@ -58,16 +55,26 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Code Explanation
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+The logic of this service resides mainly in two classes: UpdateReadme and GithubService.
 
-## Stay in touch
+UpdateReadme is a Nest.js injectable that uses Nest's cron package to periodically (every 30 minutes as currently set) fetch the number of public repositories of a GitHub user and update the README file if this number has changed.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+GithubService is the class responsible for communicating with GitHub's API. It has three main methods:
 
-## License
+- `getAllPublicReposByUsername`: fetches all the public repositories of a user.
+- `getFileContents`: gets the contents of a file in a repo.
+- `updateFile`: updates the contents of a file in a repo.
 
-Nest is [MIT licensed](LICENSE).
+## Future Work
+
+This is a simple project. In the future, we could extend this to update more data, not only the number of repositories. We could also make the interval at which the service runs configurable.
+
+## Disclaimer
+
+The usage of this tool should comply with GitHub's API usage terms and conditions. It is developed for educational purposes and should not be used to spam or disrupt the services of GitHub.
+
+Please note that the values for the environment variables in the configuration section should be replaced with actual values for the tool to work. 
+
+The same goes for the Cron job interval; it's set to update every 30 minutes for testing purposes, but this should be changed to a more reasonable interval (like every an hour or 2 hour) in a production setting.
