@@ -9,6 +9,7 @@
   <p align="center">This Nest.js project periodically updates the number of public repositories a GitHub user is maintaining in the `README.md` of a repository. The project retrieves the number of public repos and if this number has changed, it will update the README.md file on Github.
 </p>
 
+[![wakatime](https://wakatime.com/badge/github/jabibamman/auto-readme.svg)](https://wakatime.com/badge/github/jabibamman/auto-readme)
 
 ## Configuration
 
