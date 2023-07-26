@@ -28,6 +28,7 @@
     "@nestjs/schedule": "^3.0.1",
     "@octokit/rest": "^20.0.1",
     "axios": "^1.4.0",
+    "husky": "^8.0.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
   },
@@ -69,6 +70,14 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
