@@ -9,7 +9,7 @@ export class UpdateReadme {
 
   constructor(private readonly githubService: GithubService, private env: EnvHelper) {}
 
-  @Cron(CronExpression.EVERY_30_MINUTES)
+  @Cron(CronExpression.EVERY_2_HOURS)
   async handleCron() {
     let all = await this.githubService.getAllPublicReposByUsername('jabibamman');
     let numberOfRepos = all.length;
